@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE mycat:server SYSTEM "server.dtd">  
+<mycat:server xmlns:mycat="http://io.mycat/">  
+        <system>  
+                <property name="useSqlStat">0</property>    
+                <property name="useGlobleTableCheck">0</property>   
+                <property name="sequnceHandlerType">2</property>  
+                <property name="processorBufferPoolType">0</property>  
+                <property name="useOffHeapForMerge">1</property>  
+                <property name="memoryPageSize">1m</property>  
+                <property name="spillsFileBufferSize">1k</property>  
+                <property name="useStreamOutput">0</property>  
+                <property name="systemReserveMemorySize">384m</property>  
+        </system>  
+   
+        <user name="admin">  
+                <property name="password">admin123</property>  
+                <property name="schemas">messagedb</property>  
+        </user>  
+</mycat:server>  

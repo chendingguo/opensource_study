@@ -1,0 +1,47 @@
+<?xml version="1.0"?>  
+<!DOCTYPE mycat:schema SYSTEM "schema.dtd">  
+<mycat:schema xmlns:mycat="http://io.mycat/">  
+   
+        <schema name="messagedb" checkSQLschema="false" sqlMaxLimit="100">  
+                <table name="message" dataNode="dn1,dn2,dn3,dn4,dn5,dn6,dn7,dn8,dn9,dn10,dn11,dn12" rule="sharding-by-month" />  
+                <!-- global table is auto cloned to all defined data nodes ,so can join  
+                        with any table whose sharding node is in the same data node -->  
+                <table name="source" primaryKey="id" type="global" dataNode="dn1,dn2,dn3,dn4,dn5,dn6,dn7,dn8,dn9,dn10,dn11,dn12" />  
+        </schema>  
+        <dataNode name="dn1" dataHost="mysql-01" database="message201701" />  
+        <dataNode name="dn2" dataHost="mysql-01" database="message201702" />  
+        <dataNode name="dn3" dataHost="mysql-01" database="message201703" />  
+        <dataNode name="dn4" dataHost="mysql-01" database="message201704" />  
+        <dataNode name="dn5" dataHost="mysql-02" database="message201705" />  
+        <dataNode name="dn6" dataHost="mysql-02" database="message201706" />  
+        <dataNode name="dn7" dataHost="mysql-02" database="message201707" />  
+        <dataNode name="dn8" dataHost="mysql-02" database="message201708" />  
+        <dataNode name="dn9" dataHost="mysql-03" database="message201709" />  
+        <dataNode name="dn10" dataHost="mysql-03" database="message201710" />  
+        <dataNode name="dn11" dataHost="mysql-03" database="message201711" />  
+        <dataNode name="dn12" dataHost="mysql-03" database="message201712" />  
+   
+        <dataHost name="mysql-01" maxCon="1000" minCon="10" balance="0"  
+                          writeType="0" dbType="mysql" dbDriver="native" switchType="-1">  
+                <heartbeat>select user()</heartbeat>  
+                <writeHost host="hostM1" url="localhost:3306" user="root"  
+                                   password="123456">  
+                </writeHost>  
+        </dataHost>  
+   
+        <dataHost name="mysql-02" maxCon="1000" minCon="10" balance="0"  
+                          writeType="0" dbType="mysql" dbDriver="native" switchType="-1">  
+                <heartbeat>select user()</heartbeat>  
+                <writeHost host="hostM2" url="localhost:3306" user="root"  
+                                   password="123456">  
+                </writeHost>  
+        </dataHost>  
+   
+        <dataHost name="mysql-03" maxCon="1000" minCon="10" balance="0"  
+                          writeType="0" dbType="mysql" dbDriver="native" switchType="-1">  
+                <heartbeat>select user()</heartbeat>  
+                <writeHost host="hostM3" url="localhost:3306" user="root"  
+                                   password="123456">  
+                </writeHost>  
+        </dataHost>  
+</mycat:schema>  
